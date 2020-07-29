@@ -99,17 +99,3 @@ spec:
   hostPath:
     path: "/mnt/pv4"
 EOF
-helm repo add larribas https://larribas.me/helm-charts
-helm repo update
-kubectl create namespace mlflow
-kubectl create namespace airflow
-kubectl create namespace jenkins
-helm install --namespace mlflow mlflow larribas/mlflow
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
-helm install --namespace airflow airflow bitnami/airflow --version 6.3.6
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
-helm install --namespace jenkins jenkins bitnami/jenkins
