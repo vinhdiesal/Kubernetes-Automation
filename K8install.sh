@@ -3,7 +3,9 @@ sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-ce-cli
 sudo rm -rf /var/lib/docker /etc/docker
 sudo groupdel docker
 sudo rm -rf /var/run/docker.sock
+sudo su <<EOF
 mkdir -p /etc/systemd/system/docker.service.d
+EOF
 sudo apt-get purge kubeadm kubectl kubelet kubernetes-cni kube*
 sudo apt-get update
 sudo apt-get install \
@@ -19,19 +21,11 @@ sudo add-apt-repository \
    stable"
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-cat > /etc/docker/daemon.json <<EOF
-{
-  "exec-opts": ["native.cgroupdriver=systemd"],
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "100m"
-  },
-  "storage-driver": "overlay2"
-}
-EOF
 # Restart Docker
+su -c ~/main3.sh root
 systemctl daemon-reload
 systemctl restart docker
+EOF
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -116,5 +110,6 @@ helm repo update
 helm install --namespace airflow airflow bitnami/airflow --version 6.3.6
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
 helm install --namespace jenkins jenkins bitnami/jenkins
-kubectl proxy
