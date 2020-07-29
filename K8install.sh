@@ -117,3 +117,4 @@ helm install --namespace airflow airflow bitnami/airflow --version 6.3.6
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install --namespace jenkins jenkins bitnami/jenkins
+kubectl proxy
