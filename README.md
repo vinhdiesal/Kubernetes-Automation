@@ -7,7 +7,7 @@ This installation will take care of installing docker and kubernetes dependencie
 - Configures Kuberetes Dashboard 
 - Create Persistent Volumes (qty. 4 Volumes at 10Gb each)
 
-Download the repository and put the `main.sh` and main3.sh in your `home directory`, for example `/home/user`.
+Download the repository and put the `main.sh` and `main3.sh` in your `home directory`, for example `/home/user`.
 Put the `K8install.sh` in any directory, for example `/home/user/Documents`
 
 Simple navigate into the directory of `k8install.sh` and execute the command: 
